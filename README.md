@@ -4,6 +4,17 @@ A little handler that allow to send RPC with [microwork](https://github.com/yama
 
 Install : `npm install microwork-rpc-handler -S`
 
+Current : v 1.0.1 - see [CHANGELOG](https://github.com/Alex-Werner/microwork-rpc-handler/CHANGELOG.md)
+
+
+# API
+
+- `handleRPCReply(data, msg, response, reply, provider)` - Allow to reply to a given request.
+- async `handleRPCRequest(topic, data, service)` - Send the request
+- `prepareRPCRequest(data, resolve, reject, [timeout])` - Should be used before a RPCRequest. Allow to prepare the reception of the RPCCalls, and handle resolving of the promise. If provided, a timeout can be executed which will remove the event listener
+- async `subscribeToRPCEvents(service)` - Should be executed before everything : Allow to enable the reception and dispatching of future RPC Calls
+
+
 ### Usage exemple
 
 We will assume in this exemple that we use microwork and winston.
@@ -78,17 +89,10 @@ const startProvider = async() => {
 startProvider()
 ```
 
-# API
-
-- `handleRPCReply(data, msg, response, reply, provider)` - Allow to reply to a given request.
-- async `handleRPCRequest(topic, data, service)` - Send the request
-- `prepareRPCRequest(data, resolve, reject, [timeout])` - Should be used before a RPCRequest. Allow to prepare the reception of the RPCCalls, and handle resolving of the promise. If provided, a timeout can be executed which will remove the event listener
-- async `subscribeToRPCEvents(service)` - Should be executed before everything : Allow to enable the reception and dispatching of future RPC Calls
-
 # Contributions
 
 Every idea, issue, PR, contributions or anything else is welcomed :)
 
-# LICENCE
+# LICENSE
 
-MIT
+[MIT](https://github.com/Alex-Werner/microwork-rpc-handler/LICENSE)
