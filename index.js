@@ -56,7 +56,12 @@ const RPCHandler = {
                     emitter.emit(msg._rpcId, msg.data);
                 }else{
                     let _data = clone(msg);
-                    delete _data['_rpcId'];
+                    if(_data.hasOwnProperty('_rpcId')){
+                        delete _data['_rpcId'];
+                    }
+                    if(_data.hasOwnProperty('_sender')){
+                        delete _data['_sender'];
+                    }
                     emitter.emit(msg._rpcId, _data);
                 }
             }

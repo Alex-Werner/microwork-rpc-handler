@@ -1,3 +1,6 @@
+# 1.0.2
+* Removed from default response _sender value
+
 # 1.0.1
 * Feat : Added the ability to set a timeout for RPC Request
 * Misc : Added working example

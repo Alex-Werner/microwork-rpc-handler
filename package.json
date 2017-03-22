@@ -1,6 +1,6 @@
 {
   "name": "microwork-rpc-handler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A little handler that allow to send RPC with microwork package",
   "main": "index.js",
   "scripts": {
