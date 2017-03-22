@@ -2,24 +2,25 @@
 
 A little handler that allow to send RPC with [microwork](https://github.com/yamalight/microwork) package
 
-Install : `npm install microwork-rpc-handler --S`
+Install : `npm install microwork-rpc-handler -S`
 
 ### Usage exemple
 
 We will assume in this exemple that we use microwork and winston.
 
+I can only suggest you to see the working example is the [example folder](https://github.com/Alex-Werner/microwork-rpc-handler/example)
 
 Consumer.js
 ```
 const Microwork = require('microwork');
 const winston = require('winston');
-const provider = new Microwork({'/', 'myExchange', [new winston.transports.Console({level: 'error'})]});
+const provider = new Microwork({host:'/', exchange:'myExchange', loggingTransports:[new winston.transports.Console({level: 'error'})]});
 const RPCHandler = require('microwork-rpc-handler');
 
 function consumeSomething(query){
     return new Promise(async function (resolve, reject) {
         let data = {
-                type:'askForSomething';
+                type:'askForSomething',
                 query:query
         };
         //Generate a unique rpcId, and prepare himself to receive an event (using emitter.once)
@@ -45,7 +46,7 @@ provider.js
 ```
 const Microwork = require('microwork');
 const winston = require('winston');
-const provider = new Microwork({'/', 'myExchange', [new winston.transports.Console({level: 'error'})]});
+const provider = new Microwork({host:'/', exchange:'myExchange', loggingTransports:[new winston.transports.Console({level: 'error'})]});
 const RPCHandler = require('microwork-rpc-handler');
 
 const getResultFromQuery=function(query){
@@ -53,9 +54,9 @@ const getResultFromQuery=function(query){
 }
 const handleMyTopic = async function (msg, reply, ack, nack, data) {
     if(msg){
-        if(msg.hasOwnProperty('type'){
+        if(msg.hasOwnProperty('type')){
             let type = msg.type;
-            if(type=='askForSomething' && msg.hasOwnProperty('query'){
+            if(type=='askForSomething' && msg.hasOwnProperty('query')){
                 let query = msg.query;
                 let result = getResultFromQuery(query);
                 let response = {
@@ -70,7 +71,7 @@ const handleMyTopic = async function (msg, reply, ack, nack, data) {
     }
 }
 const startProvider = async() => {
-    console.log('Started providing pushes');
+    console.log('Started providing stuff');
     await RPCHandler.subscribeToRPCEvents(provider);
     await provider.subscribe('myService.myTopic', handleMyTopic);
 };
@@ -79,10 +80,10 @@ startProvider()
 
 # API
 
-- handleRPCReply(data, msg, response, reply, provider) - Allow to reply to a given request.
-- async handleRPCRequest(topic, data, service) - Send the request
-- prepareRPCRequest(data, resolve, reject) - Should be used before a RPCRequest. Allow to prepare the reception of the RPCCalls, and handle resolving of the promise.
-- async subscribeToRPCEvents(service) - Should be executed before everything : Allow to enable the reception and dispatching of future RPC Calls
+- `handleRPCReply(data, msg, response, reply, provider)` - Allow to reply to a given request.
+- async `handleRPCRequest(topic, data, service)` - Send the request
+- `prepareRPCRequest(data, resolve, reject, [timeout])` - Should be used before a RPCRequest. Allow to prepare the reception of the RPCCalls, and handle resolving of the promise. If provided, a timeout can be executed which will remove the event listener
+- async `subscribeToRPCEvents(service)` - Should be executed before everything : Allow to enable the reception and dispatching of future RPC Calls
 
 # Contributions
 

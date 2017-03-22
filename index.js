@@ -33,14 +33,20 @@ const RPCHandler = {
     handleRPCRequest: async function (topic, data, service) {
         await service.send(topic, sanitize(data), {correlationId: service.id});
     },
-    prepareRPCRequest: function (data, resolve, reject) {
+    prepareRPCRequest: function (data, resolve, reject, timeout=-1) {
         let _rpcId = uuid.generate.v4();
 
-        emitter.once(_rpcId, (data) => {
+        let listener = (data) => {
             resolve(data);
-        });
+        };
+        emitter.once(_rpcId,listener);
+        if(timeout && timeout.constructor.name=="Number" && timeout>0){
+            setTimeout(function () {
+                emitter.removeListener(_rpcId,listener);
+                resolve({error:'timeout',time:+new Date(), timeout:timeout});
+            },timeout);
+        }
         data._rpcId = _rpcId;
-
         return sanitize(data);
     },
     subscribeToRPCEvents: async function (service) {
