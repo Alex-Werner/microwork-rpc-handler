@@ -1,0 +1,23 @@
+{
+  "name": "microwork-rpc-handler-example",
+  "version": "1.0.0",
+  "description": "A little handler that allow to send RPC with microwork package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex-Werner/microwork-rpc-handler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alex-Werner/microwork-rpc-handler/issues"
+  },
+  "homepage": "https://github.com/Alex-Werner/microwork-rpc-handler#readme",
+  "dependencies": {
+    "microwork": "^0.12.0",
+    "winston": "^2.3.1"
+  }
+}
