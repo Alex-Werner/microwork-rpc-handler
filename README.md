@@ -4,7 +4,7 @@ A little handler that allow to send RPC with [microwork](https://github.com/yama
 
 Install : `npm install microwork-rpc-handler -S`
 
-Current : v 1.0.1 - see [CHANGELOG](https://github.com/Alex-Werner/microwork-rpc-handler/CHANGELOG.md)
+Current : v 1.0.1 - see [CHANGELOG](https://github.com/Alex-Werner/microwork-rpc-handler/blob/master/CHANGELOG.md)
 
 
 # API
@@ -19,7 +19,7 @@ Current : v 1.0.1 - see [CHANGELOG](https://github.com/Alex-Werner/microwork-rpc
 
 We will assume in this exemple that we use microwork and winston.
 
-I can only suggest you to see the working example is the [example folder](https://github.com/Alex-Werner/microwork-rpc-handler/example)
+I can only suggest you to see the working example is the [example folder](https://github.com/Alex-Werner/microwork-rpc-handler/blob/master/example)
 
 Consumer.js
 ```
@@ -95,4 +95,4 @@ Every idea, issue, PR, contributions or anything else is welcomed :)
 
 # LICENSE
 
-[MIT](https://github.com/Alex-Werner/microwork-rpc-handler/LICENSE)
+[MIT](https://github.com/Alex-Werner/microwork-rpc-handler/blob/master/LICENSE)
